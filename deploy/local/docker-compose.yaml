@@ -1,0 +1,16 @@
+version: "2"
+services:
+  mysqldb:
+    image: harbor.beautytiger.com/docker.io/mysql:5.7.28
+    volumes:
+      # - ./mysql-data:/var/lib/mysql
+      - ./mysql-init-files:/docker-entrypoint-initdb.d
+    restart: always
+    environment:
+      LANG: C.UTF-8
+      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: product
+#      MYSQL_USER: testuser
+#      MYSQL_PASSWORD: testuser
+    ports:
+      - "3306:3306"

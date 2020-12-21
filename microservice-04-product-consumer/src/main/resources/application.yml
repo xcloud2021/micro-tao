@@ -13,3 +13,9 @@ eureka:
 feign:
   hystrix:
     enabled: true # 开启服务熔断器
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream  # http://localhost:8000/api/v1/consumer/actuator/hystrix.stream

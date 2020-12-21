@@ -12,6 +12,7 @@
         <module>../microservice-03-product-provider</module>
         <module>../microservice-04-product-consumer</module>
         <module>../microservice-05-eureka</module>
+        <module>../microservice-06-hystrix-dashboard</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,6 +1,7 @@
 package com.beautytiger.tao.service;
 
 import com.beautytiger.tao.entities.Product;
+import com.beautytiger.tao.service.impl.ProductClientServiceFallBack;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@FeignClient(value = "microservice-product")
+@FeignClient(value = "microservice-product", fallback = ProductClientServiceFallBack.class)
 public interface ProductClientService {
 
     @RequestMapping(value = "/api/v1/product/{id}", method = RequestMethod.GET)

@@ -11,6 +11,7 @@
         <module>../microservice-02-api</module>
         <module>../microservice-03-product-provider</module>
         <module>../microservice-04-product-consumer</module>
+        <module>../microservice-05-eureka</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 public class ProductConsumerController {
-    private static final String URL_PREFIX="http://localhost:8080";
+    private static final String URL_PREFIX="http://microservice-product";
 
     @Autowired
     private RestTemplate restTemplate;

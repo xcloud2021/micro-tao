@@ -6,6 +6,8 @@ services:
       # - ./mysql-data:/var/lib/mysql
       - ./mysql-init-files:/docker-entrypoint-initdb.d
     restart: always
+    container_name: mysqldb
+    hostname: mysqldb
     environment:
       LANG: C.UTF-8
       MYSQL_ROOT_PASSWORD: root
@@ -14,3 +16,13 @@ services:
 #      MYSQL_PASSWORD: testuser
     ports:
       - "3306:3306"
+  rabbitmq:
+    image: harbor.beautytiger.com/docker.io/rabbitmq:3.8.2
+    restart: always
+    container_name: rabbitmq
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmquser
+      RABBITMQ_DEFAULT_PASS: rabbitmqpass
+    ports:
+      - "5672:5672"

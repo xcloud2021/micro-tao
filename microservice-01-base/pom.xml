@@ -13,6 +13,7 @@
         <module>../microservice-04-product-consumer</module>
         <module>../microservice-05-eureka</module>
         <module>../microservice-06-hystrix-dashboard</module>
+        <module>../microservice-07-zuul-gateway</module>
     </modules>
     <packaging>pom</packaging>
 

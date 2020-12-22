@@ -14,6 +14,7 @@
         <module>../microservice-05-eureka</module>
         <module>../microservice-06-hystrix-dashboard</module>
         <module>../microservice-07-zuul-gateway</module>
+        <module>../microservice-08-config-server</module>
     </modules>
     <packaging>pom</packaging>
 

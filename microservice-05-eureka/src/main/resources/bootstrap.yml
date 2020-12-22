@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    config:
+      name: config-eureka   # configserver上的配置名称
+      profile: prod
+      uri: http://localhost:5001

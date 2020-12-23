@@ -15,6 +15,7 @@
         <module>../microservice-06-hystrix-dashboard</module>
         <module>../microservice-07-zuul-gateway</module>
         <module>../microservice-08-config-server</module>
+        <module>../microservice-09-user</module>
     </modules>
     <packaging>pom</packaging>
 

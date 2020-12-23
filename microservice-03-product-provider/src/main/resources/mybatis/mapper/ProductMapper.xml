@@ -5,11 +5,11 @@
 <mapper namespace="com.beautytiger.tao.mapper.ProductMapper">
 
     <select id="findById" resultType="Product" parameterType="Long">
-   select pid, product_name, product_price from product where pid=#{pid};
+   select * from product where pid=#{pid};
   </select>
 
     <select id="findAll" resultType="Product">
-   select pid, product_name, product_price from product;
+   select * from product;
   </select>
 
     <insert id="addProduct" parameterType="Product">

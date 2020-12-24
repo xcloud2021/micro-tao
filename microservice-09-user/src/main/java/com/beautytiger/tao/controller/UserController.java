@@ -4,6 +4,8 @@ import com.beautytiger.tao.entities.Token;
 import com.beautytiger.tao.entities.User;
 import com.beautytiger.tao.service.UserService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -18,6 +20,8 @@ import java.util.UUID;
 @RefreshScope
 @RestController
 public class UserController {
+
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private UserService userService;
@@ -39,6 +43,7 @@ public class UserController {
 
     @RequestMapping(value="/verify", method= RequestMethod.POST)
     public User verify(@RequestBody Token token) {
+        logger.info("token: "+ token.getToken());
         Long userId = redisTemplate.opsForValue().get(token.getToken());
         if (userId == null || userId < 1) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);

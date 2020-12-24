@@ -25,8 +25,8 @@ public class CartController {
     private HttpServletRequest request;
 
     @RequestMapping(value="/", method= RequestMethod.POST)
-    public boolean login(@RequestBody Cart cart) {
-        String userIdStr = request.getHeader("userid");
+    public boolean add(@RequestBody Cart cart) {
+        String userIdStr = request.getHeader("userId");
         if (userIdStr == null || userIdStr.equals("")) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
@@ -39,6 +39,7 @@ public class CartController {
         return cartService.delete(id);
     }
 
+    // 购买购物车中的商品
     @RequestMapping(value="/{id}", method= RequestMethod.POST)
     public boolean buy(@PathVariable("id") Long id) {
         return cartService.buy(id);
@@ -46,7 +47,7 @@ public class CartController {
 
     @RequestMapping(value="/", method = RequestMethod.GET)
     public List<Cart> list() {
-        String userIdStr = request.getHeader("userid");
+        String userIdStr = request.getHeader("userId");
         if (userIdStr == null || userIdStr.equals("")) {
             // https://www.baeldung.com/exception-handling-for-rest-with-spring#controlleradvice
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);

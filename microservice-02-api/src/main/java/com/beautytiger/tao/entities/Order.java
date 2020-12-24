@@ -13,6 +13,10 @@ public class Order implements Serializable {
     public Order() {
     }
 
+    public Order(Long productId) {
+        this.productId = productId;
+    }
+
     public Order(Long userId, Long productId) {
         this.userId = userId;
         this.productId = productId;

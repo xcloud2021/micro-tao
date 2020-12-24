@@ -27,3 +27,15 @@ zuul:
       path: /api/v1/consumer/**
       serviceId: microservice-product-consumer
       stripPrefix: false
+    product-user:
+      path: /api/v1/user/**
+      serviceId: microservice-user
+      stripPrefix: false
+    product-cart:
+      path: /api/v1/cart/**
+      serviceId: microservice-cart
+      stripPrefix: false
+    product-order:
+      path: /api/v1/order/**
+      serviceId: microservice-order
+      stripPrefix: false

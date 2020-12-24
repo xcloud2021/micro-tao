@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    config:
+      name: config-cart
+      profile: dev
+      uri: http://localhost:5001
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmquser
+    password: rabbitmqpass
+
+#  暴露触发消息总线的地址
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh

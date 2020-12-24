@@ -16,6 +16,8 @@
         <module>../microservice-07-zuul-gateway</module>
         <module>../microservice-08-config-server</module>
         <module>../microservice-09-user</module>
+        <module>../microservice-10-cart</module>
+        <module>../microservice-11-order</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.beautytiger.tao.mapper.OrderMapper">
+
+    <select id="findById" resultType="Order" parameterType="Long">
+   select * from taoorder where id=#{id};
+  </select>
+
+    <select id="findByUser" resultType="Order" parameterType="Long">
+   select * from taoorder where user_id=#{userId};
+  </select>
+
+    <insert id="add" parameterType="Long">
+   INSERT INTO taoorder(user_id, product_id, product_price, create_at) VALUES(#{userId}, #{productId}, #{productPrice}, now());
+  </insert>
+
+</mapper>

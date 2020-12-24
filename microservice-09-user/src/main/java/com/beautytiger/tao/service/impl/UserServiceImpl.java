@@ -25,12 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(User user) {
-        User realUser = userMapper.login(user.getAccount(), user.getPasswd());
-        if (realUser != null && realUser.getId() > 0) {
-            return true;
-        }
-        return false;
+    public User login(User user) {
+        return userMapper.login(user.getAccount(), user.getPasswd());
     }
 
     @Override

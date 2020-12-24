@@ -1,14 +1,19 @@
 package com.beautytiger.tao.controller;
 
-import com.beautytiger.tao.entities.Product;
+import com.beautytiger.tao.entities.Token;
 import com.beautytiger.tao.entities.User;
 import com.beautytiger.tao.service.UserService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 @RefreshScope
 @RestController
@@ -17,9 +22,28 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Resource
+    private RedisTemplate<String, Long> redisTemplate;
+
     @RequestMapping(value="/login", method= RequestMethod.POST)
-    public boolean login(@RequestBody User user) {
-        return userService.login(user);
+    public Token login(@RequestBody User user) {
+        User realUser = userService.login(user);
+        if (realUser == null || realUser.getId() < 1) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
+        // todo: new save uuid -> user_id and set ttl
+        String tokenStr = UUID.randomUUID().toString();
+        redisTemplate.opsForValue().set(tokenStr, realUser.getId());
+        return new Token(tokenStr);
+    }
+
+    @RequestMapping(value="/verify", method= RequestMethod.POST)
+    public User verify(@RequestBody Token token) {
+        Long userId = redisTemplate.opsForValue().get(token.getToken());
+        if (userId == null || userId < 1) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
+        return userService.get(userId);
     }
 
     @RequestMapping(value="/logout", method= RequestMethod.POST)
@@ -32,7 +56,7 @@ public class UserController {
     public User get(@PathVariable("id") Long id) {
 
         User user =  userService.get(id);
-        // 服务异常，出发fallback
+        // 服务异常，触发fallback
         if (user == null) {
             throw new RuntimeException("ID=" + id + "不存在");
         }

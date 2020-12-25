@@ -8,9 +8,13 @@ services:
     restart: always
     container_name: mysqldb
     hostname: mysqldb
+    command:
+      - --default-time_zone=+8:00
+      - --explicit_defaults_for_timestamp
     environment:
       LANG: C.UTF-8
       MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/shanghai
 #      MYSQL_DATABASE: product
 #      MYSQL_USER: testuser
 #      MYSQL_PASSWORD: testuser

@@ -9,7 +9,7 @@
   </select>
 
     <select id="findByUser" resultType="Cart" parameterType="Long">
-   select * from taocart where user_id=#{userId};
+   select * from taocart where user_id=#{userId} order by id desc;
   </select>
 
     <insert id="add" parameterType="Long">

@@ -56,7 +56,8 @@ public class AuthFilter  extends ZuulFilter {
             return null;
         }
 
-        String token = request.getHeader("userToken");
+//        String token = request.getHeader("userToken");
+        String token = request.getHeader("X-Token");
         logger.info("userToken: " + token);
         if (token == null || token.equals("")) {
             return null;

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +29,9 @@ public class UserController {
 
     @Resource
     private RedisTemplate<String, Long> redisTemplate;
+
+    @Autowired
+    private HttpServletRequest request;
 
     @RequestMapping(value="/login", method= RequestMethod.POST)
     public Token login(@RequestBody User user) {
@@ -52,8 +56,12 @@ public class UserController {
     }
 
     @RequestMapping(value="/logout", method= RequestMethod.POST)
-    public boolean logout(@RequestBody User user) {
-        return userService.logout(user.getAccount());
+    public Boolean logout() {
+//        String userTokenStr = request.getHeader("userToken");
+//        logger.info("userTokenStr: "+ userTokenStr);
+        String userXTokenStr = request.getHeader("X-Token");
+        logger.info("userXTokenStr: "+ userXTokenStr);
+        return redisTemplate.delete(userXTokenStr);
     }
 
     @HystrixCommand(fallbackMethod = "getFallBack")

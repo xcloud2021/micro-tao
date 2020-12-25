@@ -11,4 +11,7 @@ public interface CartClientService {
 
     @RequestMapping(value = "/api/v1/cart/{id}", method = RequestMethod.GET)
     Cart get(@PathVariable("id") Long id);
+
+    @RequestMapping(value = "/api/v1/cart/{id}", method = RequestMethod.POST)
+    boolean buy(@PathVariable("id") Long id);
 }

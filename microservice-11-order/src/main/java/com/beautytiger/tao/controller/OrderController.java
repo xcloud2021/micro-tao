@@ -81,7 +81,10 @@ public class OrderController {
         if (realCart == null || realCart.getId() == null || realCart.getId() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-
+        boolean handleCartResult = cartService.buy(realCart.getId());
+        if (!handleCartResult) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
         Product product = productService.get(realCart.getProductId());
         if (product == null || product.getPid() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);

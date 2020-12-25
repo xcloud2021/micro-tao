@@ -5,6 +5,8 @@ import com.beautytiger.tao.entities.Cart;
 import com.beautytiger.tao.service.CartService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.ribbon.proxy.annotation.Http;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
@@ -18,15 +20,19 @@ import java.util.List;
 @RestController
 public class CartController {
 
+    Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private CartService cartService;
 
     @Autowired
     private HttpServletRequest request;
 
+    // 加入购物车
     @RequestMapping(value="/", method= RequestMethod.POST)
     public boolean add(@RequestBody Cart cart) {
         String userIdStr = request.getHeader("userId");
+        logger.info(": " + userIdStr);
         if (userIdStr == null || userIdStr.equals("")) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }

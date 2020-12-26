@@ -1,0 +1,95 @@
+version: "3"
+services:
+  frontend:
+    image: harbor.beautytiger.com/docker.io/mytao-front:1.0.0
+    volumes:
+      - ./config/frontend/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    depends_on: 
+      - zuul-gateway
+  config-server:
+    image: harbor.beautytiger.com/docker.io/microservice-config:1.0.0
+    restart: always
+    volumes:
+      - ./config/config-server/application.yml:/app/application.yml
+      - ./config/config-server/config:/app/config/
+    ports:
+      - "5001:5001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/actuator/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+  zuul-gateway:
+    image: harbor.beautytiger.com/docker.io/microservice-zuul:1.0.0
+    volumes:
+      - ./config/zuul/application.yml:/app/application.yml
+    ports:
+      - "7001:7001"
+    depends_on: 
+      - config-server
+      - eureka
+      - product
+      - cart
+      - order
+      - user
+  eureka:
+    image: harbor.beautytiger.com/docker.io/microservice-eureka:1.0.0
+    restart: always
+    volumes:
+      - ./config/eureka/application.yml:/app/application.yml
+      - ./config/eureka/bootstrap.yml:/app/bootstrap.yml
+    ports:
+      - "6001:6001"
+    depends_on: 
+      - config-server
+  product:
+    image: harbor.beautytiger.com/docker.io/microservice-product:1.0.0
+    volumes:
+      - ./config/product/application.yml:/app/application.yml
+      - ./config/product/bootstrap.yml:/app/bootstrap.yml
+    depends_on: 
+      - config-server
+      - eureka
+    ports:
+      - "8080"
+  cart:
+    image: harbor.beautytiger.com/docker.io/microservice-cart:1.0.0
+    volumes:
+      - ./config/cart/application.yml:/app/application.yml
+      - ./config/cart/bootstrap.yml:/app/bootstrap.yml
+    depends_on: 
+      - config-server
+      - eureka
+    ports:
+      - "8080"
+  order:
+    image: harbor.beautytiger.com/docker.io/microservice-order:1.0.0
+    volumes:
+      - ./config/order/application.yml:/app/application.yml
+      - ./config/order/bootstrap.yml:/app/bootstrap.yml
+    depends_on: 
+      - config-server
+      - eureka
+    ports:
+      - "8080"
+  user:
+    image: harbor.beautytiger.com/docker.io/microservice-user:1.0.0
+    volumes:
+      - ./config/user/application.yml:/app/application.yml
+      - ./config/user/bootstrap.yml:/app/bootstrap.yml
+    depends_on: 
+      - config-server
+      - eureka
+    ports:
+      - "8080"
+
+  # product-consumer:
+  #   image: harbor.beautytiger.com/docker.io/microservice-product-consumer:1.0.0
+  #   volumes:
+  #     - ./config/product-consumer:/app
+  # hystrix-dashboard:
+  #   image: harbor.beautytiger.com/docker.io/microservice-hystrix-dashboard:1.0.0
+  #   volumes:
+  #     - ./config/hystrix-dashboard:/app

@@ -1,0 +1,22 @@
+server:
+  port: 5001
+
+spring:
+  application:
+    name: microservice-config-server
+  profiles:
+    # https://cloud.spring.io/spring-cloud-config/reference/html/#_file_system_backend
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          # searchLocations: classpath:/config
+         searchLocations: file:/app/config
+#      使用git
+#        git:
+#          uri: https://github.com/beautytiger/micro-tao.git
+#          uri: https://github.com.cnpmjs.org/beautytiger/micro-tao.git
+#          default-label: config
+#          search-paths:
+#          - config

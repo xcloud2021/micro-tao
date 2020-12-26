@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    config:
+      name: config-order
+      profile: dev
+      uri: http://config-server:5001
+      fail-fast: true
+  rabbitmq:
+    host: 192.168.28.6
+    port: 5672
+    username: rabbitmquser
+    password: rabbitmqpass
+
+#  暴露触发消息总线的地址
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh

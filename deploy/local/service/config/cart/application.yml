@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: microservice-cart-config
+
+#server:
+#  port: 8080
+#  servlet:
+#    context-path: /api/v1/product
+#
+#mybatis:
+#  config-location: classpath:mybatis/mybatis.cfg.xml        # mybatis配置文件所在路径
+#  type-aliases-package: com.beautytiger.tao.entities        # 所有Entity别名类所在包
+#  mapper-locations: classpath:mybatis/mapper/**/*.xml       # mapper映射文件
+#
+#spring:
+#  application:
+#    name: microservice-product
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/product?useUnicode=true&serverTimezone=GMT%2b8
+#    cartname: root
+#    password: root
+#    dbcp2:
+#      min-idle: 5                                # 数据库连接池的最小维持连接数
+#      initial-size: 5                            # 初始化连接数
+#      max-total: 5                               # 最大连接数
+#      max-wait-millis: 150                       # 等待连接获取的最大超时时间
+#
+#eureka:
+#  client:
+#    registerWithEureka: true # 服务注册开关
+#    fetchRegistry: true # 服务发现开关
+#    serviceUrl: # 注册到哪一个Eureka Server服务注册中心，多个中间用逗号分隔
+#      defaultZone: http://192.168.28.6:6001/eureka
+##      defaultZone: http://eureka01.beautytiger.com:6001/eureka,http://eureka02.beautytiger.com:6002/eureka
+#  instance:
+#    instanceId: ${spring.application.name}:${server.port} # 等价于microservice-product:8001
+#    prefer-ip-address: true #访问路径就会显示成IP地址
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: hystrix.stream   # 访问时带上context前缀：http://localhost:8080/api/v1/product/actuator/hystrix.stream

@@ -87,16 +87,9 @@ services:
     ports:
       - "8080"
 
-  # product-consumer:
-  #   image: harbor.beautytiger.com/docker.io/microservice-product-consumer:1.0.0
-  #   volumes:
-  #     - ./config/product-consumer:/app
-  # hystrix-dashboard:
-  #   image: harbor.beautytiger.com/docker.io/microservice-hystrix-dashboard:1.0.0
-  #   volumes:
-  #     - ./config/hystrix-dashboard:/app
+  # 数据库服务
   mysqldb:
-    image: harbor.beautytiger.com/docker.io/mysql:5.7.28
+    image: docker.io/mysql:5.7.28
     volumes:
       # - ./mysql-data:/var/lib/mysql
       - ./mysql-init-files:/docker-entrypoint-initdb.d
@@ -113,7 +106,7 @@ services:
     ports:
       - "3306:3306"
   rabbitmq:
-    image: harbor.beautytiger.com/docker.io/rabbitmq:3.8.2
+    image: docker.io/rabbitmq:3.8.2
     restart: always
     container_name: rabbitmq
     hostname: rabbitmq
@@ -125,7 +118,7 @@ services:
     depends_on: 
       - mysqldb
   redis:
-    image: harbor.beautytiger.com/docker.io/redis:5.0.7
+    image: docker.io/redis:5.0.7
     restart: always
     container_name: redis
     hostname: redis

@@ -41,7 +41,12 @@ public class ProductController {
 
     @RequestMapping(value="/", method = RequestMethod.GET)
     public List<Product> list() {
-        return productService.list();
+        List<Product> products = productService.list();
+        for (Product product : products ) {
+            Long realPrice = product.getProductPrice() * discount / 100;
+            product.setProductPrice(realPrice);
+        }
+        return products;
     }
 
     public Product getFallBack(@PathVariable("id") Long id) {

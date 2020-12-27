@@ -1,6 +1,6 @@
-# http://192.168.28.6:5001/config-application/dev/
-# http://192.168.28.6:5001/config-application-prod.yml
-# http://192.168.28.6:5001/config-application-prod.properties
+# http://localhost:5001/config-application/dev/
+# http://localhost:5001/config-application-prod.yml
+# http://localhost:5001/config-application-prod.properties
 spring:
   profiles:
     active: dev

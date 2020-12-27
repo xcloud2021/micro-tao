@@ -1,7 +1,7 @@
 version: "3"
 services:
   frontend:
-    image: harbor.beautytiger.com/docker.io/mytao-front:1.0.0
+    image: docker.io/konmyn/microservice:front-1.0.0
     volumes:
       - ./config/frontend/nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
@@ -9,7 +9,7 @@ services:
     depends_on: 
       - zuul-gateway
   config-server:
-    image: harbor.beautytiger.com/docker.io/microservice-config:1.0.0
+    image: docker.io/konmyn/microservice:config-1.0.0
     restart: always
     volumes:
       - ./config/config-server/application.yml:/app/application.yml
@@ -21,8 +21,10 @@ services:
       interval: 10s
       timeout: 3s
       retries: 10
+    depends_on: 
+      - redis
   zuul-gateway:
-    image: harbor.beautytiger.com/docker.io/microservice-zuul:1.0.0
+    image: docker.io/konmyn/microservice:zuul-1.0.0
     volumes:
       - ./config/zuul/application.yml:/app/application.yml
     ports:
@@ -35,7 +37,7 @@ services:
       - order
       - user
   eureka:
-    image: harbor.beautytiger.com/docker.io/microservice-eureka:1.0.0
+    image: docker.io/konmyn/microservice:eureka-1.0.0
     restart: always
     volumes:
       - ./config/eureka/application.yml:/app/application.yml
@@ -45,7 +47,7 @@ services:
     depends_on: 
       - config-server
   product:
-    image: harbor.beautytiger.com/docker.io/microservice-product:1.0.0
+    image: docker.io/konmyn/microservice:product-1.0.0
     volumes:
       - ./config/product/application.yml:/app/application.yml
       - ./config/product/bootstrap.yml:/app/bootstrap.yml
@@ -55,7 +57,7 @@ services:
     ports:
       - "8080"
   cart:
-    image: harbor.beautytiger.com/docker.io/microservice-cart:1.0.0
+    image: docker.io/konmyn/microservice:cart-1.0.0
     volumes:
       - ./config/cart/application.yml:/app/application.yml
       - ./config/cart/bootstrap.yml:/app/bootstrap.yml
@@ -65,7 +67,7 @@ services:
     ports:
       - "8080"
   order:
-    image: harbor.beautytiger.com/docker.io/microservice-order:1.0.0
+    image: docker.io/konmyn/microservice:order-1.0.0
     volumes:
       - ./config/order/application.yml:/app/application.yml
       - ./config/order/bootstrap.yml:/app/bootstrap.yml
@@ -75,7 +77,7 @@ services:
     ports:
       - "8080"
   user:
-    image: harbor.beautytiger.com/docker.io/microservice-user:1.0.0
+    image: docker.io/konmyn/microservice:user-1.0.0
     volumes:
       - ./config/user/application.yml:/app/application.yml
       - ./config/user/bootstrap.yml:/app/bootstrap.yml
@@ -93,3 +95,43 @@ services:
   #   image: harbor.beautytiger.com/docker.io/microservice-hystrix-dashboard:1.0.0
   #   volumes:
   #     - ./config/hystrix-dashboard:/app
+  mysqldb:
+    image: harbor.beautytiger.com/docker.io/mysql:5.7.28
+    volumes:
+      # - ./mysql-data:/var/lib/mysql
+      - ./mysql-init-files:/docker-entrypoint-initdb.d
+    restart: always
+    container_name: mysqldb
+    hostname: mysqldb
+    command:
+      - --default-time_zone=+8:00
+      - --explicit_defaults_for_timestamp
+    environment:
+      LANG: C.UTF-8
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/shanghai
+    ports:
+      - "3306:3306"
+  rabbitmq:
+    image: harbor.beautytiger.com/docker.io/rabbitmq:3.8.2
+    restart: always
+    container_name: rabbitmq
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmquser
+      RABBITMQ_DEFAULT_PASS: rabbitmqpass
+    ports:
+      - "5672:5672"
+    depends_on: 
+      - mysqldb
+  redis:
+    image: harbor.beautytiger.com/docker.io/redis:5.0.7
+    restart: always
+    container_name: redis
+    hostname: redis
+    sysctls:
+    - net.core.somaxconn=4096
+    ports:
+      - "6379:6379"
+    depends_on: 
+      - rabbitmq

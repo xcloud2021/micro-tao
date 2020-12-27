@@ -40,7 +40,7 @@ eureka:
 
 bussiness:
   # 商品价格折扣，100代表 100%, 不打折
-  discount: 100
+  discount: 98
 
 ---
 server:
@@ -78,3 +78,7 @@ eureka:
   instance:
     instanceId: ${spring.application.name}:${server.port}
     prefer-ip-address: true
+
+bussiness:
+  # 商品价格折扣，100代表 100%, 不打折
+  discount: 88

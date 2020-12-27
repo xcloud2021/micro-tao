@@ -1,2 +1,2 @@
-FROM harbor.beautytiger.com/docker.io/microservice-java:base
+FROM docker.io/konmyn/microservice:java-base
 ADD *.jar /app/

@@ -15,9 +15,6 @@ services:
       LANG: C.UTF-8
       MYSQL_ROOT_PASSWORD: root
       TZ: Asia/shanghai
-#      MYSQL_DATABASE: product
-#      MYSQL_USER: testuser
-#      MYSQL_PASSWORD: testuser
     ports:
       - "3306:3306"
   rabbitmq:

@@ -58,10 +58,10 @@ public class AuthFilter  extends ZuulFilter {
 
 //        String token = request.getHeader("userToken");
         String token = request.getHeader("X-Token");
-        logger.info("userToken: " + token);
         if (token == null || token.equals("")) {
             return null;
         }
+        logger.info("userToken: " + token);
         User user = service.verify(new Token(token));
         logger.info(String.valueOf(user));
         if (user != null && user.getId() > 0) {

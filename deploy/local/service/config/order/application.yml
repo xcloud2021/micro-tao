@@ -32,7 +32,7 @@ spring:
 #    registerWithEureka: true # 服务注册开关
 #    fetchRegistry: true # 服务发现开关
 #    serviceUrl: # 注册到哪一个Eureka Server服务注册中心，多个中间用逗号分隔
-#      defaultZone: http://192.168.28.6:6001/eureka
+#      defaultZone: http://eureka:6001/eureka
 ##      defaultZone: http://eureka01.beautytiger.com:6001/eureka,http://eureka02.beautytiger.com:6002/eureka
 #  instance:
 #    instanceId: ${spring.application.name}:${server.port} # 等价于microservice-product:8001

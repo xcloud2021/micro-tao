@@ -27,4 +27,4 @@ out/
 .gradle/
 
 jars/
-
+*.tgz

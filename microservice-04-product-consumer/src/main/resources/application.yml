@@ -9,8 +9,8 @@ spring:
 
 eureka:
   client:
-    registerWithEureka: true # 服务注册，false表示不将本消费者注册到 Eureka 服务器
-    fetchRegistry: true # 服务发现，true从 Eureka 服务器中获取注册信息
+    registerWithEureka: false # 服务注册，false表示不将本消费者注册到 Eureka 服务器
+    fetchRegistry: false # 服务发现，true从 Eureka 服务器中获取注册信息
     serviceUrl:
       defaultZone: http://192.168.28.6:6001/eureka
   instance:

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "microservice-user")
+@FeignClient(name = "${service.microservice-user.name}", url="${service.microservice-user.url}")
 public interface UserClientService {
 
     @RequestMapping(value = "/api/v1/user/verify", method = RequestMethod.POST)

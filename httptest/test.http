@@ -8,3 +8,8 @@ POST http://localhost:5000/api/v1/user/login
 Content-Type: application/json
 
 {"account": "root", "passwd": "root"}
+
+###
+GET http://localhost:5000/api/v1/cart/
+Content-Type: application/json
+X-Token: c7740007-c1fe-4afd-91d3-a7f35fcf6e7f

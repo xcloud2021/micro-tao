@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "microservice-product")
+@FeignClient(name = "${service.microservice-product.name}", url = "${service.microservice-product.name}")
 public interface ProductClientService {
 
     @RequestMapping(value = "/api/v1/product/{id}", method = RequestMethod.GET)

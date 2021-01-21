@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients(basePackages = {"com.beautytiger.tao"})
 @EnableHystrix
-@EnableEurekaClient
+//@EnableEurekaClient
 @MapperScan("com.beautytiger.tao.mapper")
 @SpringBootApplication
 public class OrderProvider {

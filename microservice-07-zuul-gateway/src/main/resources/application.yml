@@ -40,9 +40,11 @@ zuul:
       url: http://localhost:8081
     product-cart:
       path: /api/v1/cart/**
-      serviceId: microservice-cart
+      # serviceId: microservice-cart
+      url: http://localhost:8082
       stripPrefix: false
     product-order:
       path: /api/v1/order/**
-      serviceId: microservice-order
+      # serviceId: microservice-order
+      url: http://localhost:8083
       stripPrefix: false

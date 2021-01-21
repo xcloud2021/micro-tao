@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
 @EnableHystrix
-@EnableEurekaClient
+//@EnableEurekaClient
 @MapperScan("com.beautytiger.tao.mapper")
 @SpringBootApplication
 public class ProductProvider {

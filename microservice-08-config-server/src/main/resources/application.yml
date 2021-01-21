@@ -1,5 +1,5 @@
 server:
-  port: 5001
+  port: 3001
 
 spring:
   application:
@@ -11,12 +11,11 @@ spring:
     config:
       server:
         native:
-          searchLocations: classpath:/config
+#          searchLocations: classpath:/config
 #          searchLocations: file:./config
 #      使用git
-#        git:
-#          uri: https://github.com/beautytiger/micro-tao.git
-#          uri: https://github.com.cnpmjs.org/beautytiger/micro-tao.git
-#          default-label: config
-#          search-paths:
-#          - config
+        git:
+          uri: https://gitee.com/xcloud/micro-tao.git
+          default-label: main # 代码分支
+          search-paths:
+          - config # 配置文件所在文件夹

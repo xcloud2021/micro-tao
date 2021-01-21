@@ -6,6 +6,7 @@ public class Product implements Serializable {
     private Long pid;
     private String productName;
     private Long productPrice;
+    private Long discountPrice;
     private Long productSales;
     private Long productStatus;
 
@@ -41,6 +42,14 @@ public class Product implements Serializable {
 
     public void setProductPrice(Long productPrice) {
         this.productPrice = productPrice;
+    }
+
+    public Long getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(Long discountPrice) {
+        this.discountPrice = discountPrice;
     }
 
     public Long getProductSales() {

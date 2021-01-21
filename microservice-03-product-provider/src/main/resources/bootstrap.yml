@@ -3,9 +3,9 @@ spring:
     config:
       name: config-product
       profile: dev
-      uri: http://localhost:5001
+      uri: http://localhost:3001
   rabbitmq:
-    host: localhost
+    host: 115.159.124.112
     port: 5672
     username: rabbitmquser
     password: rabbitmqpass

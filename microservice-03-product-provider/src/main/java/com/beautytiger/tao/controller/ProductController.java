@@ -35,7 +35,7 @@ public class ProductController {
             throw new RuntimeException("ID=" + id + "无效");
         }
         Long realPrice = product.getProductPrice() * discount / 100;
-        product.setProductPrice(realPrice);
+        product.setDiscountPrice(realPrice);
         return product;
     }
 
@@ -44,7 +44,7 @@ public class ProductController {
         List<Product> products = productService.list();
         for (Product product : products ) {
             Long realPrice = product.getProductPrice() * discount / 100;
-            product.setProductPrice(realPrice);
+            product.setDiscountPrice(realPrice);
         }
         return products;
     }

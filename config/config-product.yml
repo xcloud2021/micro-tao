@@ -40,7 +40,7 @@ eureka:
 
 bussiness:
   # 商品价格折扣，100代表 100%, 不打折
-  discount: 70
+  discount: 55
 
 ---
 server:
